@@ -1,0 +1,10 @@
+.btn, .button, #submit {
+    border-radius: 0;
+    background-color: $headings-primary;
+    border: 1px solid #e8e8e8;
+}
+ .btn:hover, .button:hover, #submit:hover
+  .btn:focus, .button:focus, #submit:focus
+  .btn.focus {
+    background-color: lighten($headings-primary, 10%);
+  }

@@ -3,7 +3,14 @@ $icon-font-path:        "../fonts/";
 
 // Grid settings
 $main-sm-columns:       12;
-$sidebar-sm-columns:    4;
+$sidebar-sm-columns:    3;
+$sidebar-home-columns:  4;
 
 // Colors
-$brand-primary:         #27ae60;
+$brand-primary:         #000000;
+$headings-primary:      #880f0f;
+$link-hover-color:      $headings-primary !default;
+
+// Fonts
+$headings-font:         'Ubuntu', sans-serif;
+$text-font:             'Open Sans', sans-serif;

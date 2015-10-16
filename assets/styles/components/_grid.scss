@@ -4,7 +4,16 @@
   .sidebar-primary & {
     @include make-sm-column($main-sm-columns - $sidebar-sm-columns);
   }
+  .brown.sidebar-primary & {
+    @include make-sm-column($main-sm-columns - $sidebar-home-columns);
+  }
+}
+.main.fullwidth {
+    width: 100%;
 }
 .sidebar {
   @include make-sm-column($sidebar-sm-columns);
+}
+.brown .sidebar {
+    @include make-sm-column($sidebar-home-columns);
 }

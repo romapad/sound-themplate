@@ -4,7 +4,6 @@ use Roots\Sage\Config;
 use Roots\Sage\Wrapper;
 
 ?>
-
 <!doctype html>
 <html class="no-js" <?php language_attributes(); ?>>
   <?php get_template_part('templates/head'); ?>
@@ -20,14 +19,22 @@ use Roots\Sage\Wrapper;
     ?>
     <div class="wrap container" role="document">
       <div class="content row">
-        <main class="main" role="main">
-          <?php include Wrapper\template_path(); ?>
-        </main><!-- /.main -->
+        <?php if (is_shop() OR is_product_category()) { ?>
+         <div class="main fullwidth">
+          <div class="page-header">
+            <h1>Products <?php echo get_product_search_form(); ?> </h1>
+          </div>
+          </div>
+        <?php } ?>
+
         <?php if (Config\display_sidebar()) : ?>
           <aside class="sidebar" role="complementary">
             <?php include Wrapper\sidebar_path(); ?>
           </aside><!-- /.sidebar -->
         <?php endif; ?>
+        <main class="main" role="main">
+          <?php include Wrapper\template_path(); ?>
+        </main><!-- /.main -->
       </div><!-- /.content -->
     </div><!-- /.wrap -->
     <?php
