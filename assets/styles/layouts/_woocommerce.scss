@@ -12,6 +12,11 @@
     background-color: lighten($headings-primary, 10%);
     color: #fff;
 }
+.woocommerce .woocommerce-error, .woocommerce .woocommerce-info, .woocommerce .woocommerce-message {
+    background-color: #fff;
+    border-top-color: $headings-primary;
+    color: #000;
+}
 .woocommerce .products ul, .woocommerce ul.products {
     padding: 2em 0;
 }
@@ -23,6 +28,9 @@
 }
 .star-rating-selector:not(:checked) label.checkbox:hover, .star-rating-selector:not(:checked) label.checkbox:hover ~ label.checkbox {
     color: #ffd100;
+}
+.woocommerce #reviews .product-rating .product-rating-details table td.rating-graph .bar, .woocommerce-page #reviews .product-rating .product-rating-details table td.rating-graph .bar {
+    background-color: #ffd100;
 }
 .woocommerce ul.products li.product .price {
     color: $headings-primary;
@@ -308,6 +316,7 @@ div[itemprop="offers"] {
 }
 .related h2 {
     color: $headings-primary;
+    margin: 3em 0 1em;
 }
 /* single gallery */
 .woocommerce div.product div.images div.thumbnails {

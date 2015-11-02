@@ -265,3 +265,18 @@ add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_p
 // change place for product_meta
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40, 2);
 //add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 10, 2);
+// change place for rating
+remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_rating', 10, 2);
+//tabs
+add_filter( 'woocommerce_product_tabs', 'woo_rename_tabs', 98 );
+function woo_rename_tabs( $tabs ) {
+
+	$tabs['reviews']['title'] = __( 'Reviews' );				// Rename the reviews tab
+	return $tabs;
+
+}
+add_filter( 'woocommerce_product_tabs', 'woo_remove_product_tabs', 98 );
+function woo_remove_product_tabs( $tabs ) {
+    unset( $tabs['additional_information'] );
+    return $tabs;
+}
