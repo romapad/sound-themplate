@@ -1,0 +1,32 @@
+button, input, select, textarea {
+    padding: 11px;
+}
+label {
+    display: block;
+    margin: 5px 0;
+    font-weight: 300;
+}
+label[for=rememberme].inline {
+    display: none;
+}
+input[type=text], input[type=email], input[type=password], .af-body input.text[type=text] {
+    min-width: 200px;
+    border: 1px solid #000;
+}
+/* aweber */
+.af-form {
+    max-width: 100% !important;
+    height: 85px;
+}
+ .af-body input.text[type=text] {
+    padding: 11px !important;
+    min-width: 200px !important;
+    border: 1px solid #000 !important;
+}
+.af-clear {
+    clear: none !important;
+}
+.af-element {
+    float: left !important;
+    margin-right: 5px !important;
+}

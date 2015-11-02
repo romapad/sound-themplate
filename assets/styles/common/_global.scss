@@ -1,12 +1,14 @@
+body {color: #000;}
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
-    font-weight: 400;
+        font-weight: 400;
     font-family: $text-font;
 }
 .h1, h1 {
     font-size: 30px;
 }
-button, input, select, textarea {
-    padding: 5px;
+.h3, h3 {
+    font-weight: 700;
+    font-size: 18px;
 }
 .container {
     width: 100%;
@@ -25,7 +27,6 @@ button, input, select, textarea {
 }
 
 // social counter
-
 .social-count-plus ul.custom.vertical li {
     float: left;
     width: auto;
@@ -70,49 +71,6 @@ button, input, select, textarea {
     border-bottom: 4px solid transparent;
 }
 
-// woocommerce login
-#customer_login .col-1 {
-    float: right;
-}
-#customer_login .col-2 {
-    float: left;
-}
-// woocommerce overrides
-.woocommerce #respond input#submit, .woocommerce a.button, .woocommerce button.button, .woocommerce input.button {
-    padding: .618em 1em;
-    font-family: $text-font;
-    font-weight: 700;
-    color: #fff;
-}
-.woocommerce .products .star-rating {
-    margin: 0 auto .5em;
-}
-.woocommerce ul.products li.product .price {
-    color: $headings-primary;
-    background: #fff;
-    padding: 3px;
-    display: inline-block;
-    font-size: 18px;
-    font-family: $text-font;
-    font-weight: 700;
-}
-.woocommerce ul.products li.product h3 {
-    font-weight: 700;
-    font-size: 18px;
-}
-// forms
-label {
-    display: block;
-    margin: 5px 0;
-    font-weight: 300;
-}
-label[for=rememberme].inline {
-    display: none;
-}
-input[type=text], input[type=email], input[type=password] {
-    min-width: 200px;
-    border: 1px solid #e8e8e8;
-}
 // homepage tabs
 .tabs{
 	display:inline-block;

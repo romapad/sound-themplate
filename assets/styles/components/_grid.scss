@@ -17,3 +17,9 @@
 .brown .sidebar {
     @include make-sm-column($sidebar-home-columns);
 }
+* {
+  margin: 0;
+}
+html, body {
+  height: 100%;
+}
