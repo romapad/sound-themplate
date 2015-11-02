@@ -270,13 +270,16 @@ remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_singl
 //tabs
 add_filter( 'woocommerce_product_tabs', 'woo_rename_tabs', 98 );
 function woo_rename_tabs( $tabs ) {
-
-	$tabs['reviews']['title'] = __( 'Reviews' );				// Rename the reviews tab
+	$tabs['reviews']['title'] = __( 'Reviews' );
 	return $tabs;
-
 }
 add_filter( 'woocommerce_product_tabs', 'woo_remove_product_tabs', 98 );
 function woo_remove_product_tabs( $tabs ) {
     unset( $tabs['additional_information'] );
     return $tabs;
+}
+
+add_filter( 'woocommerce_my_account_my_orders_title',              'override_my_account_my_orders_title', 10, 1 );
+function override_my_account_my_orders_title( $message ) {
+    return __( 'Order History', 'woocommerce' );
 }
