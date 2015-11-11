@@ -255,7 +255,9 @@ return 'before';
  * @desc Remove quantity in all product type
  */
 function wc_remove_all_quantity_fields( $return, $product ) {
-    return true;
+    if( is_product() ) {
+        return true;
+    }
 }
 add_filter( 'woocommerce_is_sold_individually', 'wc_remove_all_quantity_fields', 10, 2 );
 
@@ -278,8 +280,76 @@ function woo_remove_product_tabs( $tabs ) {
     unset( $tabs['additional_information'] );
     return $tabs;
 }
-
+// change my orders title
 add_filter( 'woocommerce_my_account_my_orders_title',              'override_my_account_my_orders_title', 10, 1 );
 function override_my_account_my_orders_title( $message ) {
     return __( 'Order History', 'woocommerce' );
 }
+
+// add go to shop link on cart page
+add_action('woocommerce_before_cart', 'woo_go_to_shop_link', 10);
+function woo_go_to_shop_link() {
+    $shop_page_url = get_permalink( woocommerce_get_page_id( 'shop' ) );
+    echo '<a href="'. $shop_page_url .'" class="gotoshop">Continue Shopping</a>';
+}
+
+// login-logout links in menu
+add_filter( 'wp_nav_menu_items', 'add_loginout_link', 10, 2 );
+function add_loginout_link( $items, $args ) {
+    if (is_user_logged_in() && $args->  theme_location == 'primary_navigation') {
+        $memberlink = '<a href="/account/">My Account</a>';
+        $items .= '<li class="marg"><a href="'. wp_logout_url( home_url() ) .'">Logout</a></li> <li class="span"><span>|</span></li> <li>'. $memberlink .'</li>';
+    }
+    elseif (!is_user_logged_in() && $args->theme_location == 'primary_navigation') {
+        $items .= '<li class="marg"><a href="'. site_url('/account/') .'">Login</a></li> <li class="span"><span>|</span></li> <li><a href="'. site_url('/account/') .'">Signup</a></li>';
+    }
+    return $items;
+}
+// change add to cart text
+add_filter( 'woocommerce_product_single_add_to_cart_text', 'woo_archive_custom_cart_button_text' );    // 2.1 +
+
+function woo_archive_custom_cart_button_text() {
+        return __( 'Add to Cart', 'woocommerce' );
+}
+
+// change catalog ordering function
+remove_action( 'woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30 );
+
+if ( ! function_exists( 'woocommerce_new_catalog_ordering' ) ) {
+
+	/**
+	 * Output the product sorting options.
+	 *
+	 * @subpackage	Loop
+	 */
+	function woocommerce_new_catalog_ordering() {
+		global $wp_query;
+
+		if ( ! woocommerce_products_will_display() ) {
+			return;
+		}
+
+		$orderby                 = isset( $_GET['orderby'] ) ? wc_clean( $_GET['orderby'] ) : apply_filters( 'woocommerce_default_catalog_orderby', get_option( 'woocommerce_default_catalog_orderby' ) );
+		$show_default_orderby    = 'menu_order' === apply_filters( 'woocommerce_default_catalog_orderby', get_option( 'woocommerce_default_catalog_orderby' ) );
+		$catalog_orderby_options = apply_filters( 'woocommerce_catalog_orderby', array(
+			'menu_order' => __( 'Default sorting', 'woocommerce' ),
+			'popularity' => __( 'Sort by popularity', 'woocommerce' ),
+			'rating'     => __( 'Sort by average rating', 'woocommerce' ),
+			'date'       => __( 'Sort by newness', 'woocommerce' ),
+			'price'      => __( 'Sort by price: low to high', 'woocommerce' ),
+			'price-desc' => __( 'Sort by price: high to low', 'woocommerce' )
+		) );
+
+		if ( ! $show_default_orderby ) {
+			unset( $catalog_orderby_options['menu_order'] );
+		}
+
+		if ( get_option( 'woocommerce_enable_review_rating' ) === 'no' ) {
+			unset( $catalog_orderby_options['rating'] );
+		}
+
+		wc_get_template( 'loop/orderby.php', array( 'catalog_orderby_options' => $catalog_orderby_options, 'orderby' => $orderby, 'show_default_orderby' => $show_default_orderby ) );
+	}
+}
+
+add_action( 'woocommerce_before_shop_loop', 'woocommerce_new_catalog_ordering', 30 );

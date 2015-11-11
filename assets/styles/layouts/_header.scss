@@ -35,7 +35,7 @@ a.brand {
 .header-top .offer {
     font-family: $headings-font;
 }
-nav {
+header nav {
     height: 37px;
     float: right;
 }
@@ -50,12 +50,17 @@ nav {
     padding: 10px 46px 10px 0;
     font-weight: 700;
 }
+.nav li.marg a {
+    padding: 10px 10px 10px 0;
+}
 .nav>li>a:focus, .nav>li>a:hover {
     color: $headings-primary;
     background: none;
 }
-.nav li.menu-item span {
+.nav li.span span {
     color: $headings-primary;
+    padding: 10px 10px 10px 0;
+    display: block;
     font-family: $text-font;
     font-weight: 700;
     text-shadow: 1px 0px 0px #880f0f;

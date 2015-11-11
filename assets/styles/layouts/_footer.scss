@@ -1,6 +1,6 @@
 /* footer widgets */
 footer.content-info {
-    margin-top: 75px;
+    margin-top: 33px;
 }
 footer .footer-left {
     float: left;
@@ -25,6 +25,7 @@ footer .footer-left section.widget {
 footer section.widget h3 {
     color: $headings-primary;
     margin-bottom: 20px;
+    font-weight: 400;
 }
 footer section.widget ul {
     padding: 0;
@@ -74,7 +75,7 @@ footer section.widget .red-disc {
     width: 100%;
     height: 65px;
     padding: 15px 0;
-    margin-top: 42px;
+    margin-top: 25px;
     font-family: $text-font;
 }
 .copyright .c-left {

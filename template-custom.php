@@ -58,7 +58,9 @@ wp_reset_postdata();
     <div class="tab-content"><?php echo do_shortcode('[featured_products per_page="8" columns="4"]'); ?></div>
 </div>
 </div>
-<h2 class="h2brown">Endorsements</h2>
+<?php $cc = get_the_content();
+if($cc != '') { ?>
+<h2 class="h2brown"><?php the_title(); ?></h2>
 <div class="brown sidebar-primary">
     <div class="wrap container" role="document">
       <div class="content row">
@@ -76,3 +78,4 @@ wp_reset_postdata();
       </div><!-- /.content -->
     </div><!-- /.wrap -->
 </div>
+<?php } ?>

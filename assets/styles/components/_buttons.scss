@@ -1,8 +1,8 @@
-.btn, .button, #submit, .buttonContainer input.submit {
+.btn, .button, #submit, .buttonContainer input.submit, footer .af-body.af-standards input.submit {
     border-radius: 0;
     background-color: $headings-primary;
-    border: 1px solid #e8e8e8 !important;
-    padding: 11px 20px 10px !important;
+    border: none;
+    padding: 10px 20px;
 }
  .btn:hover, .button:hover, #submit:hover
   .btn:focus, .button:focus, #submit:focus
