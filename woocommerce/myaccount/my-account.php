@@ -24,17 +24,14 @@ wc_print_notices(); ?>
 <p class="myaccount_user">
 	<?php
 	printf(
-		__( '<strong>%1$s</strong> <small>(<a href="%2$s">Sign out</a>)</small>', 'woocommerce' ) . ' ',
-		$current_user->display_name,
+		__( '<strong>%1$s</strong>', 'woocommerce' ) . ' ',
+		$current_user->user_email,
 		wc_get_endpoint_url( 'customer-logout', '', wc_get_page_permalink( 'myaccount' ) )
 	);
 	?>
 </p>
 <?php wc_get_template( 'myaccount/my-address.php' ); ?>
 
-<p>
-    <?php echo esc_attr( $current_user->user_email ); ?>
-</p>
 </div>
 
 <?php wc_get_template( 'myaccount/my-downloads.php' ); ?>
@@ -44,7 +41,7 @@ wc_print_notices(); ?>
 
 
 
-<?php wc_get_template( 'myaccount/my-orders.php', array( 'order_count' => $order_count ) ); ?>
+<?php // wc_get_template( 'myaccount/my-orders.php', array( 'order_count' => $order_count ) ); ?>
 
 
 

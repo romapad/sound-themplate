@@ -42,7 +42,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 	<?php if ( in_array( 'product', $comments_on ) ) : ?>
 
-		<table class="shop_table shop_table_responsive my_account_contributions">
+		<table class="shop_table shop_table_responsive my_account_contributions special">
 
 			<thead>
 				<tr>

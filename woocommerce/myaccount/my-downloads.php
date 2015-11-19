@@ -58,7 +58,7 @@ if ( $downloads = WC()->customer->get_downloadable_products() ) :
 
         foreach ( $downloads_cat as $key => $value ) {
             echo '<div class="category_block">';
-            echo '<h2>'. $key .'</h2>';
+            echo '<h2>'. $key .' Downloads</h2>';
             foreach ( $value as $tags => $elements ) {
                 echo '<div class="tag_block"><h4>'. $tags .'</h4><ul>';
 

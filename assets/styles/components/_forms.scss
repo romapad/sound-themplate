@@ -1,11 +1,6 @@
 button, input, select, textarea {
     padding:  9px 10px;
 }
-label {
-    display: block;
-    margin: 5px 0;
-    font-weight: 300;
-}
 label[for=rememberme].inline {
     display: none;
 }

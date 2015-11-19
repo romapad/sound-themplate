@@ -297,7 +297,7 @@ function woo_go_to_shop_link() {
 add_filter( 'wp_nav_menu_items', 'add_loginout_link', 10, 2 );
 function add_loginout_link( $items, $args ) {
     if (is_user_logged_in() && $args->  theme_location == 'primary_navigation') {
-        $memberlink = '<a href="/account/">My Account</a>';
+        $memberlink = '<a href="'. site_url('/account/') .'">My Account</a>';
         $items .= '<li class="marg"><a href="'. wp_logout_url( home_url() ) .'">Logout</a></li> <li class="span"><span>|</span></li> <li>'. $memberlink .'</li>';
     }
     elseif (!is_user_logged_in() && $args->theme_location == 'primary_navigation') {

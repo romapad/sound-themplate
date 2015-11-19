@@ -22,7 +22,6 @@ $col = 1;
 <?php foreach ( $get_addresses as $name => $title ) : ?>
 
 	<div class="address">
-	    <a href="<?php echo wc_get_endpoint_url( 'edit-address', $name ); ?>" class="edit"><?php _e( 'edit address', 'woocommerce' ); ?></a>
 		<address>
 			<?php
 				$address = apply_filters( 'woocommerce_my_account_my_address_formatted_address', array(

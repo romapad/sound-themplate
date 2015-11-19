@@ -11,9 +11,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+global $current_user;
+
+get_currentuserinfo();
+
 ?>
 
 <?php wc_print_notices(); ?>
+
+<div class="col2-set" id="customer_profile">
+
+	<div class="col-1">
+    <h3>Account Details</h3>
 
 <form action="" method="post">
 
@@ -35,14 +44,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</p>
 
 	<fieldset>
-		<legend><?php _e( 'Password Change', 'woocommerce' ); ?></legend>
+		<h3><?php _e( 'Password Change', 'woocommerce' ); ?></h3>
 
 		<p class="form-row form-row-wide">
 			<label for="password_current"><?php _e( 'Current Password (leave blank to leave unchanged)', 'woocommerce' ); ?></label>
 			<input type="password" class="input-text" name="password_current" id="password_current" />
 		</p>
 		<p class="form-row form-row-first">
-			<label for="password_1"><?php _e( 'New Password (leave blank to leave unchanged)', 'woocommerce' ); ?></label>
+			<label for="password_1"><?php _e( 'New Password', 'woocommerce' ); ?></label>
 			<input type="password" class="input-text" name="password_1" id="password_1" />
 		</p>
 		<p class="form-row form-row-last">
@@ -56,10 +65,42 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<p>
 		<?php wp_nonce_field( 'save_account_details' ); ?>
-		<input type="submit" class="button" name="save_account_details" value="<?php esc_attr_e( 'Save changes', 'woocommerce' ); ?>" />
+		<input type="submit" class="button" name="save_account_details" value="<?php esc_attr_e( 'Save Changes', 'woocommerce' ); ?>" />
 		<input type="hidden" name="action" value="save_account_details" />
 	</p>
 
 	<?php do_action( 'woocommerce_edit_account_form_end' ); ?>
 
 </form>
+	</div>
+
+	<div class="col-2">
+
+	<form method="post">
+
+		<h3>Billing Address</h3>
+<?php
+        $load_address = 'billing';
+        $address = WC()->countries->get_address_fields(get_user_meta(get_current_user_id(), $load_address . '_country', true), $load_address . '_');
+?>
+		<?php do_action( "woocommerce_before_edit_address_form_{$load_address}" ); ?>
+
+		<?php foreach ( $address as $key => $field ) : ?>
+
+			<?php woocommerce_form_field( $key, $field, ! empty( $_POST[ $key ] ) ? wc_clean( $_POST[ $key ] ) : $field['value'] ); ?>
+
+		<?php endforeach; ?>
+
+		<?php do_action( "woocommerce_after_edit_address_form_{$load_address}" ); ?>
+
+		<p>
+			<input type="submit" class="button" name="save_address" value="<?php esc_attr_e( 'Save Address', 'woocommerce' ); ?>" />
+			<?php wp_nonce_field( 'woocommerce-edit_address' ); ?>
+			<input type="hidden" name="action" value="edit_address" />
+		</p>
+
+	</form>
+
+	</div>
+
+</div>
