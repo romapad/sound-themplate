@@ -8,6 +8,10 @@ input[type=text], input[type=email], input[type=password], .af-body input.text[t
     min-width: 200px;
     border: 1px solid #000;
 }
+.comment-form input[type=text], .comment-form input[type=email], .comment-form input[type=url], .comment-form textarea, .form-control {
+    height: 40px;
+    border-radius: 0;
+}
 /* aweber */
 .af-form {
     max-width: 100% !important;

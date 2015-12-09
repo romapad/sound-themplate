@@ -3,9 +3,11 @@
     background-color: $headings-primary;
     border: none;
     padding: 10px 20px;
+    color: #fff;
 }
  .btn:hover, .button:hover, #submit:hover
   .btn:focus, .button:focus, #submit:focus
   .btn.focus {
     background-color: lighten($headings-primary, 10%) !important;
+
   }

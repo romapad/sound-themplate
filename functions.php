@@ -241,7 +241,7 @@ function custom_override_pagination_args( $args ) {
 
 
 // change place for "my contributions"
-if (wc_product_reviews_pro()){
+if( function_exists('wc_product_reviews_pro') && wc_product_reviews_pro()) {
 remove_action( 'woocommerce_before_my_account', array( wc_product_reviews_pro()->frontend, 'render_my_account_contributions' ), 11 );
 add_action( 'woocommerce_after_my_account', array( wc_product_reviews_pro()->frontend, 'render_my_account_contributions' ), 5 );
 }
@@ -268,7 +268,7 @@ add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_p
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40, 2);
 //add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 10, 2);
 // change place for rating
-remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_rating', 10, 2);
+//remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_rating', 10, 2);
 //tabs
 add_filter( 'woocommerce_product_tabs', 'woo_rename_tabs', 98 );
 function woo_rename_tabs( $tabs ) {
@@ -292,6 +292,14 @@ function woo_go_to_shop_link() {
     $shop_page_url = get_permalink( woocommerce_get_page_id( 'shop' ) );
     echo '<a href="'. $shop_page_url .'" class="gotoshop">Continue Shopping</a>';
 }
+// add go to cart link on checkout page
+add_action('woocommerce_before_checkout_form', 'woo_go_to_cart_link', 10);
+function woo_go_to_cart_link() {
+    global $woocommerce;
+    $cart_url = $woocommerce->cart->get_cart_url();
+    echo '<a href="'. $cart_url .'" class="gotoshop">Back to Shopping Cart</a>';
+}
+
 
 // login-logout links in menu
 add_filter( 'wp_nav_menu_items', 'add_loginout_link', 10, 2 );
@@ -353,3 +361,6 @@ if ( ! function_exists( 'woocommerce_new_catalog_ordering' ) ) {
 }
 
 add_action( 'woocommerce_before_shop_loop', 'woocommerce_new_catalog_ordering', 30 );
+
+// remove cross-sell from cart
+remove_action( 'woocommerce_cart_collaterals', 'woocommerce_cross_sell_display' , 10 );
