@@ -292,13 +292,7 @@ function woo_go_to_shop_link() {
     $shop_page_url = get_permalink( woocommerce_get_page_id( 'shop' ) );
     echo '<a href="'. $shop_page_url .'" class="gotoshop">Continue Shopping</a>';
 }
-// add go to cart link on checkout page
-add_action('woocommerce_before_checkout_form', 'woo_go_to_cart_link', 10);
-function woo_go_to_cart_link() {
-    global $woocommerce;
-    $cart_url = $woocommerce->cart->get_cart_url();
-    echo '<a href="'. $cart_url .'" class="gotoshop">Back to Shopping Cart</a>';
-}
+
 
 
 // login-logout links in menu
@@ -364,3 +358,64 @@ add_action( 'woocommerce_before_shop_loop', 'woocommerce_new_catalog_ordering', 
 
 // remove cross-sell from cart
 remove_action( 'woocommerce_cart_collaterals', 'woocommerce_cross_sell_display' , 10 );
+
+
+// customize checkout fields
+add_filter( 'woocommerce_checkout_fields' , 'custom_override_checkout_fields' );
+
+function custom_override_checkout_fields( $fields ) {
+     $fields['billing']['billing_first_name']['placeholder'] = 'First Name';
+     $fields['billing']['billing_first_name']['label'] = '';
+     $fields['billing']['billing_last_name']['placeholder'] = 'Last Name';
+     $fields['billing']['billing_last_name']['label'] = '';
+     $fields['billing']['billing_company']['placeholder'] = 'Company (optional)';
+     $fields['billing']['billing_company']['label'] = '';
+     $fields['billing']['billing_email']['placeholder'] = 'Email Address';
+     $fields['billing']['billing_email']['label'] = '';
+     $fields['billing']['billing_phone']['placeholder'] = 'Phone';
+     $fields['billing']['billing_phone']['label'] = '';
+     $fields['billing']['billing_country']['placeholder'] = 'Country';
+     $fields['billing']['billing_country']['label'] = '';
+     $fields['billing']['billing_country']['class'] = array('form-row form-row-last');
+     $fields['billing']['billing_address_1']['placeholder'] = 'Address';
+     $fields['billing']['billing_address_1']['label'] = '';
+     $fields['billing']['billing_address_1']['class'] = array('form-row form-row-first');
+     $fields['billing']['billing_address_2']['class'] = array('form-row form-row-last');
+     $fields['billing']['billing_city']['placeholder'] = 'Town/City';
+     $fields['billing']['billing_city']['label'] = '';
+     $fields['billing']['billing_city']['class'] = array('form-row form-row-first');
+     $fields['billing']['billing_state']['placeholder'] = 'State';
+     $fields['billing']['billing_state']['label'] = '';
+     $fields['billing']['billing_state']['class'] = array('form-row form-row-last');
+     $fields['billing']['billing_postcode']['placeholder'] = 'Postcode/Zip';
+     $fields['billing']['billing_postcode']['label'] = '';
+     $fields['billing']['billing_postcode']['class'] = array('form-row form-row-first');
+
+
+    $order = array(
+        "billing_first_name",
+        "billing_last_name",
+        "billing_company",
+        "billing_email",
+        "billing_phone",
+        "billing_address_1",
+        "billing_address_2",
+        "billing_city",
+        "billing_country",
+        "billing_postcode",
+        "billing_state"
+
+    );
+    foreach($order as $field)
+    {
+        $ordered_fields[$field] = $fields["billing"][$field];
+    }
+
+    $fields["billing"] = $ordered_fields;
+
+
+     return $fields;
+}
+
+remove_action( 'woocommerce_checkout_order_review', 'woocommerce_checkout_payment', 20 );
+add_action( 'woocommerce_checkout_after_order_review', 'woocommerce_checkout_payment', 20 );

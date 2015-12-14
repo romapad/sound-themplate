@@ -1,6 +1,12 @@
 button, input, select, textarea {
     padding:  9px 10px;
 }
+.select2-container .select2-choice {
+    padding: 5px 0 5px 8px;
+    border: 1px solid #000;
+    color: #444;
+    border-radius: 0;
+}
 label[for=rememberme].inline {
     display: none;
 }
