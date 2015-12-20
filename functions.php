@@ -246,7 +246,7 @@ remove_action( 'woocommerce_before_my_account', array( wc_product_reviews_pro()-
 add_action( 'woocommerce_after_my_account', array( wc_product_reviews_pro()->frontend, 'render_my_account_contributions' ), 5 );
 }
 
-// change place for wichlists
+// change place for wishlists
 add_filter('woocommerce_wishlists_account_location', 'change_woocommerce_wishlists_account_location', 10, 1);
 function change_woocommerce_wishlists_account_location($location) {
 return 'before';
@@ -298,6 +298,7 @@ function woo_go_to_shop_link() {
 // login-logout links in menu
 add_filter( 'wp_nav_menu_items', 'add_loginout_link', 10, 2 );
 function add_loginout_link( $items, $args ) {
+    $items .= '<li id="" class="menu-item menu-item-type-custom menu-item-object-custom"><a id="gw-header" href="#" onclick="GrooveWidget.toggle(); return false;">Support</a></li>';
     if (is_user_logged_in() && $args->  theme_location == 'primary_navigation') {
         $memberlink = '<a href="'. site_url('/account/') .'">My Account</a>';
         $items .= '<li class="marg"><a href="'. wp_logout_url( home_url() ) .'">Logout</a></li> <li class="span"><span>|</span></li> <li>'. $memberlink .'</li>';
@@ -417,5 +418,19 @@ function custom_override_checkout_fields( $fields ) {
      return $fields;
 }
 
+// change place for payment option
 remove_action( 'woocommerce_checkout_order_review', 'woocommerce_checkout_payment', 20 );
-add_action( 'woocommerce_checkout_after_order_review', 'woocommerce_checkout_payment', 20 );
+add_action( 'woocommerce_new_payment_place', 'woocommerce_checkout_payment', 20 );
+// change Order Button text
+add_filter( 'woocommerce_order_button_text', create_function( '', 'return "Place Order";' ) );
+
+// change credit card fields
+add_filter( 'woocommerce_credit_card_form_fields' , 'custom_override_cards_fields' );
+
+function custom_override_cards_fields( $fields ) {
+    $fields['card-number-field'] = '<p class="form-row form-row-wide"><input id="stripe-card-number" class="input-text wc-credit-card-form-card-number" type="text" maxlength="20" autocomplete="off" placeholder="Card Number"/></p>';
+    $fields['card-expiry-field'] = '<p class="form-row form-row-first"><input id="stripe-card-expiry" class="input-text wc-credit-card-form-card-expiry" type="text" autocomplete="off" placeholder="Expiration Date (MM/YY)"/></p>';
+    $fields['card-cvc-field'] = '<p class="form-row form-row-last"><input id="stripe-card-cvc" class="input-text wc-credit-card-form-card-cvc" type="text" autocomplete="off" placeholder="CVC Code"/></p>';
+
+    return $fields;
+}

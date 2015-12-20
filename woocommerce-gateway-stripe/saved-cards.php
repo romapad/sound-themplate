@@ -1,5 +1,5 @@
-<h2 id="saved-cards" style="margin-top:40px;"><?php _e( 'Saved cards', 'woocommerce-gateway-stripe' ); ?></h2>
-<table class="shop_table">
+<h2 id="saved-cards" style="margin-top:40px;display: none;"><?php _e( 'Saved cards', 'woocommerce-gateway-stripe' ); ?></h2>
+<table class="shop_table" style="display: none;">
 	<thead>
 		<tr>
 			<th><?php _e( 'Card', 'woocommerce-gateway-stripe' ); ?></th>
