@@ -461,7 +461,6 @@
 
           $(document).ready(function(){
           	$(".tabs").lightTabs();
-            $(".rslides").responsiveSlides({ nav: true, pager: true,  speed: 2000 });
           });
 
       }

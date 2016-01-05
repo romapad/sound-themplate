@@ -88,20 +88,10 @@ function custom_oembed_filter($html, $url, $attr, $post_ID) {
     return $return;
 }
 
-// Change number or products per row to 3
-add_filter('loop_shop_columns', 'loop_columns');
-if (!function_exists('loop_columns')) {
-	function loop_columns() {
-		return 3; // 3 products per row
-	}
-}
 
 
-/**
- * Add new register fields for WooCommerce registration.
- *
- * @return string Register fields HTML.
- */
+
+// Add new register fields for WooCommerce registration.
 function wooc_extra_register_fields() {
 	?>
 
@@ -119,15 +109,6 @@ function wooc_extra_register_fields() {
 
 add_action( 'woocommerce_register_form_start', 'wooc_extra_register_fields' );
 
-/**
- * Validate the extra register fields.
- *
- * @param  string $username          Current username.
- * @param  string $email             Current email.
- * @param  object $validation_errors WP_Error object.
- *
- * @return void
- */
 function wooc_validate_extra_register_fields( $username, $email, $validation_errors ) {
 	if ( isset( $_POST['billing_first_name'] ) && empty( $_POST['billing_first_name'] ) ) {
 		$validation_errors->add( 'billing_first_name_error', __( '<strong>Error</strong>: First name is required!', 'woocommerce' ) );
@@ -141,13 +122,6 @@ function wooc_validate_extra_register_fields( $username, $email, $validation_err
 
 add_action( 'woocommerce_register_post', 'wooc_validate_extra_register_fields', 10, 3 );
 
-/**
- * Save the extra register fields.
- *
- * @param  int  $customer_id Current customer ID.
- *
- * @return void
- */
 function wooc_save_extra_register_fields( $customer_id ) {
 	if ( isset( $_POST['billing_first_name'] ) ) {
 		// WordPress default first name field.
@@ -169,13 +143,12 @@ function wooc_save_extra_register_fields( $customer_id ) {
 add_action( 'woocommerce_created_customer', 'wooc_save_extra_register_fields' );
 
 
+// change appearance of catalog sorting fields
 remove_action( 'woocommerce_before_main_content','woocommerce_breadcrumb', 20, 0);
-
 /** Remove Showing results functionality site-wide */
 function woocommerce_result_count() {
         return;
 }
-
 // Lets create the function to house our form
 //remove_action( 'woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30 );
 
@@ -251,24 +224,26 @@ add_filter('woocommerce_wishlists_account_location', 'change_woocommerce_wishlis
 function change_woocommerce_wishlists_account_location($location) {
 return 'before';
 }
-/**
- * @desc Remove quantity in all product type
- */
+
+// Remove quantity in all product type
 function wc_remove_all_quantity_fields( $return, $product ) {
-    if( is_product() ) {
         return true;
-    }
 }
 add_filter( 'woocommerce_is_sold_individually', 'wc_remove_all_quantity_fields', 10, 2 );
+
 
 // change place for price
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10, 2);
 add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 25, 2);
+
+
 // change place for product_meta
 remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 40, 2);
 //add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_meta', 10, 2);
 // change place for rating
 //remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_rating', 10, 2);
+
+
 //tabs
 add_filter( 'woocommerce_product_tabs', 'woo_rename_tabs', 98 );
 function woo_rename_tabs( $tabs ) {
@@ -280,11 +255,15 @@ function woo_remove_product_tabs( $tabs ) {
     unset( $tabs['additional_information'] );
     return $tabs;
 }
+
+
 // change my orders title
 add_filter( 'woocommerce_my_account_my_orders_title',              'override_my_account_my_orders_title', 10, 1 );
 function override_my_account_my_orders_title( $message ) {
     return __( 'Order History', 'woocommerce' );
 }
+
+
 
 // add go to shop link on cart page
 add_action('woocommerce_before_cart', 'woo_go_to_shop_link', 10);
@@ -294,20 +273,23 @@ function woo_go_to_shop_link() {
 }
 
 
-
 // login-logout links in menu
 add_filter( 'wp_nav_menu_items', 'add_loginout_link', 10, 2 );
 function add_loginout_link( $items, $args ) {
+    if ( $args->  theme_location == 'primary_navigation') {
     $items .= '<li id="" class="menu-item menu-item-type-custom menu-item-object-custom"><a id="gw-header" href="#" onclick="GrooveWidget.toggle(); return false;">Support</a></li>';
+    }
     if (is_user_logged_in() && $args->  theme_location == 'primary_navigation') {
         $memberlink = '<a href="'. site_url('/account/') .'">My Account</a>';
         $items .= '<li class="marg"><a href="'. wp_logout_url( home_url() ) .'">Logout</a></li> <li class="span"><span>|</span></li> <li>'. $memberlink .'</li>';
     }
     elseif (!is_user_logged_in() && $args->theme_location == 'primary_navigation') {
-        $items .= '<li class="marg"><a href="'. site_url('/account/') .'">Login</a></li> <li class="span"><span>|</span></li> <li><a href="'. site_url('/account/') .'">Signup</a></li>';
+        $items .= '<li class="marg"><a href="'. site_url('/account/#member_login') .'">Login</a></li> <li class="span"><span>|</span></li> <li><a href="'. site_url('/account/#member_register') .'">Signup</a></li>';
     }
     return $items;
 }
+
+
 // change add to cart text
 add_filter( 'woocommerce_product_single_add_to_cart_text', 'woo_archive_custom_cart_button_text' );    // 2.1 +
 
@@ -315,16 +297,12 @@ function woo_archive_custom_cart_button_text() {
         return __( 'Add to Cart', 'woocommerce' );
 }
 
+
 // change catalog ordering function
 remove_action( 'woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30 );
 
 if ( ! function_exists( 'woocommerce_new_catalog_ordering' ) ) {
 
-	/**
-	 * Output the product sorting options.
-	 *
-	 * @subpackage	Loop
-	 */
 	function woocommerce_new_catalog_ordering() {
 		global $wp_query;
 
@@ -357,9 +335,12 @@ if ( ! function_exists( 'woocommerce_new_catalog_ordering' ) ) {
 
 add_action( 'woocommerce_before_shop_loop', 'woocommerce_new_catalog_ordering', 30 );
 
+
 // remove cross-sell from cart
 remove_action( 'woocommerce_cart_collaterals', 'woocommerce_cross_sell_display' , 10 );
 
+
+/* CHECKOUT CHANGES */
 
 // customize checkout fields
 add_filter( 'woocommerce_checkout_fields' , 'custom_override_checkout_fields' );
@@ -377,21 +358,20 @@ function custom_override_checkout_fields( $fields ) {
      $fields['billing']['billing_phone']['label'] = '';
      $fields['billing']['billing_country']['placeholder'] = 'Country';
      $fields['billing']['billing_country']['label'] = '';
-     $fields['billing']['billing_country']['class'] = array('form-row form-row-last');
+     $fields['billing']['billing_country']['class'] = array('form-row-last address-field update_totals_on_change woocommerce-validated');
      $fields['billing']['billing_address_1']['placeholder'] = 'Address';
      $fields['billing']['billing_address_1']['label'] = '';
-     $fields['billing']['billing_address_1']['class'] = array('form-row form-row-first');
-     $fields['billing']['billing_address_2']['class'] = array('form-row form-row-last');
+     $fields['billing']['billing_address_1']['class'] = array('form-row-first address-field validate-required woocommerce-validated');
+     $fields['billing']['billing_address_2']['class'] = array('form-row-last address-field woocommerce-validated');
      $fields['billing']['billing_city']['placeholder'] = 'Town/City';
      $fields['billing']['billing_city']['label'] = '';
-     $fields['billing']['billing_city']['class'] = array('form-row form-row-first');
+     $fields['billing']['billing_city']['class'] = array('form-row-first address-field woocommerce-validated');
      $fields['billing']['billing_state']['placeholder'] = 'State';
      $fields['billing']['billing_state']['label'] = '';
-     $fields['billing']['billing_state']['class'] = array('form-row form-row-last');
+     $fields['billing']['billing_state']['class'] = array('form-row-last address-field validate-required  update_totals_on_change woocommerce-validated');
      $fields['billing']['billing_postcode']['placeholder'] = 'Postcode/Zip';
      $fields['billing']['billing_postcode']['label'] = '';
-     $fields['billing']['billing_postcode']['class'] = array('form-row form-row-first');
-
+     $fields['billing']['billing_postcode']['class'] = array('form-row-first address-field validate-required');
 
     $order = array(
         "billing_first_name",
@@ -414,19 +394,17 @@ function custom_override_checkout_fields( $fields ) {
 
     $fields["billing"] = $ordered_fields;
 
-
      return $fields;
 }
+
 
 // change place for payment option
 remove_action( 'woocommerce_checkout_order_review', 'woocommerce_checkout_payment', 20 );
 add_action( 'woocommerce_new_payment_place', 'woocommerce_checkout_payment', 20 );
 // change Order Button text
 add_filter( 'woocommerce_order_button_text', create_function( '', 'return "Place Order";' ) );
-
 // change credit card fields
 add_filter( 'woocommerce_credit_card_form_fields' , 'custom_override_cards_fields' );
-
 function custom_override_cards_fields( $fields ) {
     $fields['card-number-field'] = '<p class="form-row form-row-wide"><input id="stripe-card-number" class="input-text wc-credit-card-form-card-number" type="text" maxlength="20" autocomplete="off" placeholder="Card Number"/></p>';
     $fields['card-expiry-field'] = '<p class="form-row form-row-first"><input id="stripe-card-expiry" class="input-text wc-credit-card-form-card-expiry" type="text" autocomplete="off" placeholder="Expiration Date (MM/YY)"/></p>';
@@ -434,3 +412,6 @@ function custom_override_cards_fields( $fields ) {
 
     return $fields;
 }
+
+// remove Order Again button from thank you page
+remove_action( 'woocommerce_order_details_after_order_table', 'woocommerce_order_again_button' );

@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <?php endif; ?>
 
-		<h2><?php _e( 'Login', 'woocommerce' ); ?></h2>
+		<h2 id="member_login"><?php _e( 'Login', 'woocommerce' ); ?></h2>
 
 		<form method="post" class="login">
 
@@ -61,7 +61,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	<div class="col-2">
 
-		<h2><?php _e( 'Register', 'woocommerce' ); ?></h2>
+		<h2 id="member_register"><?php _e( 'Register', 'woocommerce' ); ?></h2>
 
 		<form method="post" class="register">
 

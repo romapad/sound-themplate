@@ -1,7 +1,11 @@
 <div class="header-top">
      <div class="container">
          <div class="social">
-             <?php echo get_scp_widget(); ?>
+             <?php //if ( function_exists('get_scp_widget') ) {
+                  //echo get_scp_widget();
+             //} else {
+                  dynamic_sidebar('sidebar-top-left');
+            //}?>
          </div>
          <div class="offer">
              <?php dynamic_sidebar('sidebar-top'); ?>

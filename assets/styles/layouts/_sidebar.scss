@@ -6,3 +6,6 @@
 .product-categories li {
     margin: 0;
 }
+.product-categories li.current-cat a {
+    color: $headings-primary;
+}

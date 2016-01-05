@@ -3,6 +3,14 @@
 <input type="hidden" name="add-to-wishlist-type" value="<?php echo $product->product_type; ?>" />
 <input type="hidden" name="wl_from_single_product" value="<?php echo is_product() ? '1' : '0'; ?>" />
 
+<?php $current_user = wp_get_current_user();
+
+if ( wc_customer_bought_product( $current_user->user_email, $current_user->ID, $product->id)) {
+
+}
+
+else { ?>
+
 <div id="wl-wrapper" class="woocommerce wl-button-wrap wl-row wl-clear <?php echo $product->is_type('variable') ? 'hide' : ''; ?>" >
 
 	<?php if (woocommerce_wishlists_get_wishlists_for_product($product->id)) : ?>
@@ -29,3 +37,4 @@
 	window.woocommerce_wishlist_add_to_wishlist_url = "<?php echo esc_url( add_query_arg(array('add-to-wishlist-itemid' => $product->id) ) ); ?>";
 </script>
 <?php endif; ?>
+<?php } ?>

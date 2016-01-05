@@ -16,6 +16,11 @@ $query = new WP_Query( $args );
 
 // The Loop
 if ( $query->have_posts() ) { ?>
+       <script>
+          jQuery(document).ready(function(){
+            jQuery(".rslides").responsiveSlides({ nav: true, pager: false,  speed: 2000, timeout: 6000 });
+          });
+       </script>
        <div class="slider">
         <ul class="rslides">
 	<?php while ( $query->have_posts() ) {

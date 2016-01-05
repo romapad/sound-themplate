@@ -5,17 +5,20 @@ footer.content-info {
 footer .footer-left {
     float: left;
     width: 34%;
-    margin-left: 45px;
 }
 footer .footer-right {
     float: right;
-    margin-right: 45px;
+    width: 66%;
 }
 footer section.widget {
-    width: 250px;
+    width: 33%;
     float: left;
     font-family: $text-font;
     padding-left: 52px;
+}
+footer .footer-right section.widget:last-child {
+    min-width: 250px;
+    float: right;
 }
 footer .footer-left section.widget {
     width: 100%;
@@ -66,8 +69,8 @@ footer section.widget .red-disc {
     background: url(../images/moneymethods.png) no-repeat;
     width: 210px;
     height: 24px;
-    margin: 100px 0 0 -18px;
-    float: right;
+    margin: 50px 0px 0px -8px;
+    float: left;
 }
 .copyright {
     background-color: #000000;

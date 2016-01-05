@@ -7,6 +7,7 @@
 }
 .header-top .social {
     float: left;
+    margin-top: -9px;
 }
 .header-top .offer {
     float: right;
@@ -29,7 +30,7 @@ a.brand {
     width: 438px;
     height: 67px;
     float: left;
-    background: url(../images/Logo.png);
+    background: url(../images/Logo.png) no-repeat top left;
     text-indent: -9999px;
 }
 .header-top .offer {
@@ -38,6 +39,7 @@ a.brand {
 header nav {
     height: 37px;
     float: right;
+    margin-top: 7px;
 }
 .nav {
     float: left;

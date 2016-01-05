@@ -15,7 +15,7 @@ if ( $order ) : ?>
 
 	<?php if ( $order->has_status( 'failed' ) ) : ?>
 
-		<p><?php _e( 'Unfortunately your order cannot be processed as the originating bank/merchant has declined your transaction.', 'woocommerce' ); ?></p>
+		<p class="thankp"><?php _e( 'Unfortunately your order cannot be processed as the originating bank/merchant has declined your transaction.', 'woocommerce' ); ?></p>
 
 		<p><?php
 			if ( is_user_logged_in() )
@@ -24,7 +24,7 @@ if ( $order ) : ?>
 				_e( 'Please attempt your purchase again.', 'woocommerce' );
 		?></p>
 
-		<p>
+		<p class="thankp">
 			<a href="<?php echo esc_url( $order->get_checkout_payment_url() ); ?>" class="button pay"><?php _e( 'Pay', 'woocommerce' ) ?></a>
 			<?php if ( is_user_logged_in() ) : ?>
 			<a href="<?php echo esc_url( wc_get_page_permalink( 'myaccount' ) ); ?>" class="button pay"><?php _e( 'My Account', 'woocommerce' ); ?></a>
@@ -33,7 +33,7 @@ if ( $order ) : ?>
 
 	<?php else : ?>
 
-		<p><?php echo apply_filters( 'woocommerce_thankyou_order_received_text', __( 'Thank you. Your order has been received.', 'woocommerce' ), $order ); ?></p>
+		<p class="thankp"><?php echo apply_filters( 'woocommerce_thankyou_order_received_text', __( 'Thank you. Your order has been received.', 'woocommerce' ), $order ); ?></p>
 
 		<ul class="order_details">
 			<li class="order">
@@ -64,6 +64,6 @@ if ( $order ) : ?>
 
 <?php else : ?>
 
-	<p><?php echo apply_filters( 'woocommerce_thankyou_order_received_text', __( 'Thank you. Your order has been received.', 'woocommerce' ), null ); ?></p>
+	<p class="thankp"><?php echo apply_filters( 'woocommerce_thankyou_order_received_text', __( 'Thank you. Your order has been received.', 'woocommerce' ), null ); ?></p>
 
 <?php endif; ?>

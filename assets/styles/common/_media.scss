@@ -5,10 +5,194 @@
     .tabs>div {
         padding: 35px 15px;
     }
-    footer .footer-left {
+    .cart .woocommerce .product-name {
+        width: auto;
+    }
+}
+@media screen and (max-width: 1180px) {
+    header nav {
+        float: left;
+        margin-top: 20px;
+    }
+    .af-body input.text[type=text], input[type=email], input[type=password], input[type=text] {
+        min-width: auto !important;
+    }
+    li.payment_method_stripe label {
+        background: none;
+        width: auto;
+    }
+    .checkout_coupon .input-text {
+        width: 54%;
+    }
+    .checkout_coupon .button {
+        width: 40%;
+    }
+    #wl-wrapper.wl-button-wrap {
+        clear: both;
+        padding: 10px 0;
+        width: auto;
+        float: none;
+    }
+    #wl-wrapper .wl-add-but {
         margin-left: 0;
     }
+    .wl-already-in {
+        margin-left: 0;
+        float: none;
+    }
+    footer .footer-left {
+        width: 40%;
+    }
     footer .footer-right {
+        width: 60%;
+    }
+    footer section.widget {
+        width: 50%;
+        padding-left: 20px;
+    }
+    footer .footer-right section.widget:last-child {
+        width: 100%;
+        float: none;
+        clear: both;
+        padding-top: 30px;
+    }
+    .social-links {
+        text-align: left;
+        float: left;
+    }
+    .money-methods {
+        margin: 10px 0 0;
+    }
+}
+@media screen and (max-width: 960px) {
+    #content .itemsorder h3 {
+        display: none;
+    }
+    .social-links a {
+        margin: 0 10px 0 0;
+    }
+}
+@media screen and (max-width: 768px) {
+    .header-top {
+        height: 80px;
+    }
+    .header-top .social {
+        float: none;
+    }
+    .header-top .offer {
+        float: none;
+        margin-top: 10px;
+    }
+    .nav li a {
+        padding: 10px 10px 10px 0;
+    }
+    .woocommerce-checkout .woocommerce .col2-set .col-2 {
+        position: inherit;
+    }
+    .woocommerce-checkout .col2-set .col-1 {
+        width: 100%;
+        padding: 0;
+        border: none;
+    }
+    .digital-downloads .category_block:first-child {
+        margin-left: 0;
+    }
+    footer .footer-left, footer .footer-right {
+        width: 100%;
+        float: none;
+    }
+    footer section.widget {
+        padding-left: 0;
+    }
+    .af-body input.text[type=text] {
+        min-width: 200px !important;
+    }
+    .woocommerce-page .woocommerce-tabs.wc-tabs-wrapper {
+        width: 100%;
+        float: none;
+    }
+    .woocommerce table.cart td.actions,
+    .woocommerce table.cart td.carttot {
+        vertical-align: top;
+    }
+    .woocommerce-cart .wc-proceed-to-checkout {
+        padding: 0;
+    }
+    .woocommerce table.shop_table.special thead th.product-remove {
+        min-width: 20px;
+    }
+    .woocommerce table.cart td.actions input {
+        width: 60% !important;
+    }
+    .woocommerce-checkout .col-top {
+        width: 100%;
+        padding-right: 0;
+        border-right: none;
+        margin-top: 20px;
+    }
+    .product-categories li {
+        margin: 0 15px 0 0px;
+        float: left;
+    }
+    .woocommerce ul.products li.product,
+    .woocommerce-page ul.products li.product {
+        width: 48%;
+        margin: 0 0 2.992em;
+    }
+    .woocommerce div.product div.images {
+        margin: 0 auto 2em;
+    }
+    .woocommerce-cart table.special .product-name a {
         margin-right: 0;
+    }
+    .tabs>ul li {
+        margin: 0 20px;
+    }
+    .tabs>ul li h2 {
+        font-size: 20px;
+    }
+}
+@media screen and (max-width: 480px) {
+    a.brand {
+        width: 100%;
+        background-size: contain;
+    }
+    .copyright {
+        height: 100px;
+    }
+    .copyright .c-left {
+        float: none;
+    }
+    .copyright .c-right {
+        float: none;
+    }
+    .woocommerce table.cart td.actions input {
+        width: 100%;
+    }
+    .showlogin {
+        float: left;
+        margin: 0 0 10px;
+    }
+    .woocommerce-checkout form.login input.input-text {
+        width: 37%;
+    }
+    .woocommerce-checkout form.login input.button {
+        width: 20%;
+    }
+    .woocommerce #customer_login form.login,
+    .woocommerce #customer_login form.register {
+        width: 100%;
+        float: none;
+    }
+    #woocommerce-sort-by-columns {
+        display: none;
+    }
+    .tabs>ul li {
+        margin: 0 10px;
+    }
+    #wpmenucartli {
+        margin-top: -40px;
+        position: absolute;
+        right: 15px;
     }
 }

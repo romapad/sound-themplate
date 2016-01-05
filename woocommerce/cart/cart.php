@@ -24,7 +24,6 @@ do_action( 'woocommerce_before_cart' ); ?>
 		<tr>
 			<th class="product-name"><?php _e( 'Item', 'woocommerce' ); ?></th>
 			<th class="product-price"><?php _e( 'Price', 'woocommerce' ); ?></th>
-			<th class="product-quantity"><?php _e( 'Qty', 'woocommerce' ); ?></th>
 			<th class="product-subtotal"><?php _e( 'Total', 'woocommerce' ); ?></th>
 			<th class="product-remove">&nbsp;</th>
 		</tr>
@@ -75,23 +74,6 @@ do_action( 'woocommerce_before_cart' ); ?>
 						?>
 					</td>
 
-					<td class="product-quantity">
-						<?php
-							if ( $_product->is_sold_individually() ) {
-								$product_quantity = sprintf( '1 <input type="hidden" name="cart[%s][qty]" value="1" />', $cart_item_key );
-							} else {
-								$product_quantity = woocommerce_quantity_input( array(
-									'input_name'  => "cart[{$cart_item_key}][qty]",
-									'input_value' => $cart_item['quantity'],
-									'max_value'   => $_product->backorders_allowed() ? '' : $_product->get_stock_quantity(),
-									'min_value'   => '0'
-								), $_product, false );
-							}
-
-							echo apply_filters( 'woocommerce_cart_item_quantity', $product_quantity, $cart_item_key, $cart_item );
-						?>
-					</td>
-
 					<td class="product-subtotal">
 						<?php
 							echo apply_filters( 'woocommerce_cart_item_subtotal', WC()->cart->get_product_subtotal( $_product, $cart_item['quantity'] ), $cart_item, $cart_item_key );
@@ -117,7 +99,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 		do_action( 'woocommerce_cart_contents' );
 		?>
 		<tr>
-			<td colspan="2" class="actions">
+			<td colspan="1" class="actions">
 
 
 				<input type="submit" class="button muted" name="update_cart" value="<?php esc_attr_e( 'Update Cart', 'woocommerce' ); ?>" />
@@ -126,7 +108,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 
 				<?php wp_nonce_field( 'woocommerce-cart' ); ?>
 			</td>
-			<td colspan="3">
+			<td colspan="3" class="carttot">
                 <?php do_action( 'woocommerce_cart_collaterals' ); ?>
             </td>
 		</tr>
