@@ -78,10 +78,11 @@
     }
     .header-top .social {
         float: none;
+        margin-top: -15px;
     }
     .header-top .offer {
         float: none;
-        margin-top: 10px;
+        margin-top: -10px;
     }
     .nav li a {
         padding: 10px 10px 10px 0;
@@ -165,6 +166,11 @@
     }
     .copyright .c-right {
         float: none;
+    }
+    footer section.widget {
+        float: none;
+        clear: both;
+        padding: 20px 0 0;
     }
     .woocommerce table.cart td.actions input {
         width: 100%;
